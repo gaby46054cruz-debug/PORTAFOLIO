@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabriel Cruz | Títulos, Certificados & Estudios</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="estudios.css">
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+  <div class="app-container">
+    
+    <!-- ENCABEZADO PRINCIPAL -->
+    <header class="main-header">
+      <div class="user-badge">PORTAFOLIO ACADÉMICO & PROFESIONAL</div>
+      <h1 class="header-name">GABRIEL CRUZ</h1>
+      <h2 class="header-title">Títulos, Certificados y Formación</h2>
+      <p class="header-desc">
+        Registro centralizado de acreditaciones académicas, certificaciones técnicas y trayectorias de estudio desarrolladas.
+      </p>
+    </header>
+
+    <!-- BARRAS DE NAVEGACIÓN DE SECCIONES (DINÁMICAS) -->
+    <nav class="sections-nav" id="sectionsNav">
+      <!-- Carga dinámica de pestañas/secciones desde Firestore -->
+    </nav>
+
+    <!-- SECCIÓN DE AVISOS O DESTACADOS (OPCIONAL/DINÁMICA) -->
+    <div id="announcementsContainer"></div>
+
+    <!-- CONTENEDOR DE CONTENIDO PRINCIPAL -->
+    <main class="main-content" id="mainContent">
+      <div class="loading-spinner">Cargando datos desde Firebase...</div>
+    </main>
+
+    <!-- SECCIÓN INFERIOR: PANEL DE ADMINISTRACIÓN / LOGIN -->
+    <footer class="admin-footer">
+      <div class="admin-status" id="adminStatus">
+        <button class="btn-neon-sm" id="btnOpenAuth">🔐 Acceso Administrador</button>
+      </div>
+
+      <div class="admin-panel hidden" id="adminPanel">
+        <div class="admin-panel-header">
+          <h3>⚡ Panel de Control - Gabriel Cruz</h3>
+          <button class="btn-danger-sm" id="btnLogout">Cerrar Sesión</button>
+        </div>
+
+        <!-- ACCIONES RÁPIDAS DEL ADMIN -->
+        <div class="admin-actions-grid">
+          <button class="btn-neon" id="btnNewSectionModal">+ Nueva Sección Principal</button>
+          <button class="btn-neon-alt" id="btnNewSubSectionModal">+ Nueva Subsección / Publicación</button>
+        </div>
+      </div>
+
+      <p class="copyright">&copy; <span id="year"></span> Gabriel Cruz. Todos los derechos reservados.</p>
+    </footer>
+
+  </div>
+
+  <!-- MODAL DE AUTENTICACIÓN (LOGIN) -->
+  <div class="modal-overlay hidden" id="authModal">
+    <div class="modal-box">
+      <span class="modal-close" id="closeAuthModal">&times;</span>
+      <h3 class="modal-title">Iniciar Sesión - Admin</h3>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Correo Electrónico:</label>
+          <input type="email" id="loginEmail" placeholder="admin@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label>Contraseña:</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <p class="auth-error hidden" id="authError">Credenciales incorrectas.</p>
+        <button type="submit" class="btn-neon full-width">Ingresar al Panel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CREAR/EDITAR SECCIÓN PRINCIPAL -->
+  <div class="modal-overlay hidden" id="sectionModal">
+    <div class="modal-box">
+      <span class="modal-close" id="closeSectionModal">&times;</span>
+      <h3 class="modal-title" id="sectionModalTitle">Nueva Sección Principal</h3>
+      <form id="sectionForm">
+        <input type="hidden" id="sectionId">
+        <div class="form-group">
+          <label>Nombre de la Sección (Ej: Títulos, Certificados, Eventos):</label>
+          <input type="text" id="sectionName" placeholder="Escribí el nombre aquí..." required>
+        </div>
+        <div class="form-group">
+          <label>Orden / Posición (Número):</label>
+          <input type="number" id="sectionOrder" value="1" min="1" required>
+        </div>
+        <button type="submit" class="btn-neon full-width">Guardar Sección</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CREAR/EDITAR SUBSECCIÓN (PUBLICACIÓN) -->
+  <div class="modal-overlay hidden" id="subSectionModal">
+    <div class="modal-box modal-large">
+      <span class="modal-close" id="closeSubSectionModal">&times;</span>
+      <h3 class="modal-title" id="subSectionModalTitle">Nueva Subsección / Publicación</h3>
+      <form id="subSectionForm">
+        <input type="hidden" id="subSectionId">
+        
+        <div class="form-group">
+          <label>Sección Perteneciente:</label>
+          <select id="subSectionParentId" required>
+            <!-- Opciones cargadas dinámicamente -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Título de la Subsección / Certificado:</label>
+          <input type="text" id="subSectionTitle" placeholder="Ej: Técnico en Redes - Certificación Cisco" required>
+        </div>
+
+        <div class="form-group">
+          <label>Descripción / Detalle:</label>
+          <textarea id="subSectionDesc" rows="3" placeholder="Descripción detallada de la acreditación o evento..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>URLs de Imágenes / Videos (Una por línea):</label>
+          <p class="help-text">Si agregás 1 sola URL, se verá fija. Si agregás 2 o más, se creará un carrusel dinámico.</p>
+          <textarea id="subSectionMediaUrls" rows="4" placeholder="https://ejemplo.com/imagen1.jpg&#10;https://ejemplo.com/imagen2.png" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-neon full-width">Guardar Publicación</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL LIGHTBOX / VISOR DE IMÁGENES AMPLIADAS -->
+  <div class="modal-overlay hidden" id="lightboxModal">
+    <span class="modal-close" id="closeLightbox">&times;</span>
+    <div class="lightbox-container" id="lightboxContent"></div>
+  </div>
+
+  <!-- FIREBASE SCRIPTS & LOGIC -->
+  <script type="module" src="estudios.js"></script>
+</body>
+</html>
