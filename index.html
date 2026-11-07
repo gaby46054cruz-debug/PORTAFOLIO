@@ -1,153 +1,218 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jose Gabriel Cruz | Portafolio Técnico</title>
-    <link rel="stylesheet" href="inicio.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio | José Gabriel Cruz</title>
+  <link rel="stylesheet" href="portafolio.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body id="body-bg">
+  
+  <!-- PANTALLA DE CARGA DE ALTA PRIORIDAD -->
+  <div id="loader-screen" class="loader-screen">
+    <div class="spinner-gold"></div>
+    <p class="loader-text">Cargando portafolio, espere un momento...</p>
+  </div>
 
-    <!-- Marca de agua / Fondo transparente de tu logo -->
-    <div class="background-logo"></div>
+  <div class="overlay"></div>
 
-    <!-- Encabezado Principal / Perfil -->
-    <header class="profile-header pulse-neon">
-        <div class="profile-avatar-container">
-            <img src="w.jpeg" alt="Jose Gabriel Cruz" class="profile-avatar">
+  <!-- NAVEGACIÓN SUPERIOR POR SECCIONES -->
+  <nav class="nav-bar" id="top-nav">
+    <div class="nav-container" id="nav-container">
+      <!-- Se puebla dinámicamente -->
+    </div>
+  </nav>
+
+  <main class="main-container">
+    <!-- SECCIÓN ENCABEZADO Y PERFIL -->
+    <header class="header-section">
+      <div class="profile-photo-wrapper">
+        <div class="gold-ring"></div>
+        <img id="profile-img" src="https://via.placeholder.com/160" alt="José Gabriel Cruz">
+      </div>
+
+      <h1 class="profile-name" id="user-name">José Gabriel Cruz</h1>
+
+      <!-- ENCUADRE DE DATOS PERSONALES -->
+      <div class="info-card" id="info-card">
+        <div class="info-grid" id="info-grid">
+          <!-- Datos dinámicos -->
         </div>
-        <h1 class="profile-name">JOSE GABRIEL CRUZ</h1>
-        <p class="profile-tagline">Técnico en Redes | Desarrollador Web | Instalador de CCTV</p>
-        
-        <div class="profile-details">
-            <span class="detail-item">📍 Alderetes, Tucumán, Argentina</span>
-            <span class="detail-item">💻 Especialista en Infraestructura & Software <br> <br>
-                 DATOS PERSONALES: <br> edad: 20 años  <br> UBICACION: Alderetes, Tucumán <br> <br>
-                 CONTACTO: <br> Email:  gaby46054cruz@gmail.com
-                 <br>Celular: +54 3816375220
-            </span>
-        </div>
+      </div>
+
+      <!-- BOTONES DE CABECERA CENTRADOS (ENTRE DATOS Y CONTENIDO) -->
+      <div class="header-quick-buttons" id="header-quick-buttons">
+        <!-- Se generan dinámicamente -->
+      </div>
     </header>
 
-    <!-- MENSAJE INDICATIVO SOBRE LOS BOTONES -->
-    <div class="nav-instruction-container">
-        <p class="nav-instruction">👇 Presiona cualquier botón para ingresar a ver cada sección 👇</p>
+    <!-- SECCIONES DE RECUADROS / CONTENIDO DINÁMICO -->
+    <section class="content-sections" id="dynamic-sections">
+      <!-- Se generan dinámicamente según Firebase -->
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="main-footer" id="main-footer">
+    <p>&copy; <span id="year"></span> José Gabriel Cruz — Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- BOTÓN CANDADO PARA PANEL ADM -->
+  <button id="admin-trigger-btn" class="lock-btn" title="Acceso Administrativo">
+    <i class="fa-solid fa-lock"></i>
+  </button>
+
+  <!-- MODAL AUTENTICACIÓN FIREBASE -->
+  <div class="modal" id="login-modal">
+    <div class="modal-content auth-box">
+      <button class="close-modal" id="close-login">&times;</button>
+      <h2 class="modal-title"><i class="fa-solid fa-shield-halved"></i> Panel Administrativo</h2>
+      <p class="modal-subtitle">Ingresa con tus credenciales de Firebase</p>
+      <form id="login-form">
+        <div class="form-group">
+          <label><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
+          <input type="email" id="login-email" required placeholder="correo@ejemplo.com">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-key"></i> Contraseña</label>
+          <input type="password" id="login-password" required placeholder="••••••••">
+        </div>
+        <p id="login-error" class="error-msg"></p>
+        <button type="submit" class="btn btn-gold w-100">Iniciar Sesión</button>
+      </form>
     </div>
+  </div>
 
-    <!-- Navegación con Botones a los Costados (Grid 2x2 para Celular/Móvil) -->
-    <nav class="action-buttons-nav">
-        <!-- Opciones de Navegación:
-             Puedes usar un archivo local (ej: 'experiencias.html') 
-             O una URL externa (ej: 'https://wa.me/549XXXXXXXXX' o 'https://linkedin.com/in/tu-perfil')
-        -->
-        
-        <!-- Botón 1: Redes y Telecomunicaciones -->
-        <a href="pagina estudio/estudios.html" class="nav-btn pulse-neon">
-            <span class="btn-icon">🎓</span>
-            <span class="btn-text">ESTADO ACADEMICO</span>
-            <span class="btn-arrow">↳ Entrar</span>
-        </a>
+  <!-- PANEL DE ADMINISTRACIÓN PRINCIPAL -->
+  <div class="modal" id="admin-panel">
+    <div class="modal-content admin-box">
+      <div class="admin-header">
+        <h2><i class="fa-solid fa-sliders"></i> Gestor del Portafolio</h2>
+        <button id="logout-btn" class="btn btn-danger-outline"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+      </div>
 
-        <!-- Botón 2: Cámaras y Videovigilancia -->
-        <a href="https://serviciosl.netlify.app/" class="nav-btn pulse-neon">
-            <span class="btn-icon">🛠️</span>
-            <span class="btn-text">SERVICIOS Y EXPERIENCIAS</span>
-            <span class="btn-arrow">↳ Entrar</span>
-        </a>
+      <!-- BOTONES DE PESTAÑA EN FILA -->
+      <div class="admin-nav-tabs">
+        <button class="tab-btn active" data-tab="tab-profile"><i class="fa-solid fa-user-gear"></i> Encabezado</button>
+        <button class="tab-btn" data-tab="tab-boxes"><i class="fa-solid fa-layer-group"></i> Crear/Editar Recuadro</button>
+        <button class="tab-btn" data-tab="tab-style"><i class="fa-solid fa-palette"></i> Diseño de Página</button>
+      </div>
 
-       
-        <!-- Botón 4: Contacto / Contáctame directamente -->
-        <!-- OPCIÓN A (Archivo Local): <a href="contacto.html" class="nav-btn pulse-neon"> -->
-        <!-- OPCIÓN B (URL Externa / WhatsApp): <a href="https://wa.me/549381XXXXXXX" target="_blank" class="nav-btn pulse-neon"> -->
-        <a href="pagina contacto/contacto.html" class="nav-btn pulse-neon">
-            <span class="btn-icon">📩</span>
-            <span class="btn-text">CONTACTO</span>
-            <span class="btn-arrow">↳ Entrar</span>
-        </a>
+      <!-- TAB 1: ENCABEZADO -->
+      <div class="tab-content active" id="tab-profile">
+        <h3>Editar Encabezado y Datos Personales</h3>
+        <form id="profile-form">
+          <div class="form-group">
+            <label>URL Foto de Perfil</label>
+            <input type="url" id="edit-profile-img" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label>Nombre Completo</label>
+            <input type="text" id="edit-profile-name" value="José Gabriel Cruz">
+          </div>
 
-        
-    </nav>
+          <h4>Campos de Información (Icono, Etiqueta, Valor)</h4>
+          <div id="personal-fields-container"></div>
+          <button type="button" id="add-field-btn" class="btn btn-secondary-outline">+ Agregar Campo de Datos</button>
 
-    <!-- Contenedor Principal: 4 Secciones Informativas -->
-    <main class="main-content">
+          <hr class="divider">
 
-        <!-- SECCIÓN 1: Redes & Infraestructura -->
-        <section class="info-card pulse-neon">
-            <div class="card-badge">Especialidad</div>
-            <h2 class="card-title">1. Redes & Infraestructura IT</h2>
-            <p class="card-description">
-                Diseño, configuración e implementación de arquitecturas de red bajo modelos OSI y TCP/IP.
-            </p>
-            <ul class="card-list">
-                <li>Subnetting, direccionamiento IP y priorización QoS.</li>
-                <li>Cableado estructurado bajo normas TIA/EIA e ISO.</li>
-                <li>Configuración de routers, switches, subredes y servidores local/FTP.</li>
-            </ul>
-            <div class="card-action">
-               
+          <h4>Botones Centrados de Cabecera (Contacto, Enlaces, etc.)</h4>
+          <div id="header-buttons-container"></div>
+          <button type="button" id="add-header-btn" class="btn btn-secondary-outline">+ Agregar Botón Centrado</button>
+
+          <button type="submit" class="btn btn-gold mt-20">Guardar Cambios de Encabezado</button>
+        </form>
+      </div>
+
+      <!-- TAB 2: CREAR Y GESTIONAR RECUADROS -->
+      <div class="tab-content" id="tab-boxes">
+        <h3 id="box-form-title">Nuevo Recuadro / Sección</h3>
+        <form id="box-form">
+          <input type="hidden" id="editing-box-index" value="-1">
+          <div class="form-group">
+            <label>Sección / Categoría</label>
+            <input type="text" id="box-section" required placeholder="Ej: Técnico en Redes y Computación, Desarrollo Web, etc.">
+          </div>
+          <div class="form-group">
+            <label>Título del Recuadro</label>
+            <input type="text" id="box-title" required placeholder="Ej: Especialista en Infraestructura y CCTV">
+          </div>
+          <div class="form-group">
+            <label>Descripción / Texto</label>
+            <textarea id="box-desc" rows="4" placeholder="Escribe los detalles de esta experiencia o servicio..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>URLs de Imágenes (separadas por coma para Carrusel)</label>
+            <textarea id="box-images" rows="2" placeholder="https://link1.jpg, https://link2.jpg"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Cantidad de Botones de Enlace</label>
+            <div class="inline-input">
+              <input type="number" id="box-btn-count" min="0" max="10" value="0">
+              <button type="button" id="gen-buttons-btn" class="btn btn-secondary-outline">Generar Campos</button>
             </div>
-        </section>
+          </div>
 
-        <!-- SECCIÓN 2: CCTV & Seguridad Electrónica -->
-        <section class="info-card pulse-neon">
-            <div class="card-badge">Servicio Técnico</div>
-            <h2 class="card-title">2. Sistemas de Videovigilancia (CCTV)</h2>
-            <p class="card-description">
-                Instalación integral, calibración y mantenimiento preventivo/correctivo de hardware de seguridad.
-            </p>
-            <ul class="card-list">
-                <li>Montaje e integración de cámaras IP, DVRs y NVRs.</li>
-                <li>Configuración de menús OSD, estándares de transmisión y coaxial control.</li>
-                <li>Acceso e integración remota a monitoreo desde smartphones y PC.</li>
-            </ul>
-            <div class="card-action">
-                <a href="camaras/camaras.html" class="link-btn">Ver Galerías de Instalación →</a>
+          <div id="dynamic-buttons-inputs"></div>
+
+          <div style="display: flex; gap: 10px;" class="mt-20">
+            <button type="submit" id="save-box-btn" class="btn btn-gold" style="flex: 1;">Guardar Recuadro</button>
+            <button type="button" id="cancel-edit-box-btn" class="btn btn-secondary-outline" style="display: none;">Cancelar Edición</button>
+          </div>
+        </form>
+
+        <hr class="divider">
+        <h3>Recuadros Existentes</h3>
+        <div id="admin-boxes-list"></div>
+      </div>
+
+      <!-- TAB 3: DISEÑO DE PÁGINA -->
+      <div class="tab-content" id="tab-style">
+        <h3>Personalización de Estilos y Colores</h3>
+        <form id="style-form">
+          <div class="form-group">
+            <label>URL Fondo de Pantalla (Background)</label>
+            <input type="url" id="style-bg-url" placeholder="https://...">
+          </div>
+          <div class="form-group grid-2">
+            <div>
+              <label>Color Encabezado/Tarjetas</label>
+              <input type="color" id="style-card-bg" value="#12141a">
             </div>
-        </section>
-
-        <!-- SECCIÓN 3: Desarrollo Web & Proyectos IA -->
-        <section class="info-card pulse-neon">
-            <div class="card-badge">Desarrollo</div>
-            <h2 class="card-title">3. Desarrollo Web & Asistentes IA</h2>
-            <p class="card-description">
-                Creación de sitios web dinámicos, adaptables y soluciones de escritorio integradas con Inteligencia Artificial.
-            </p>
-            <ul class="card-list">
-                <li>Interfaces interactivas con HTML, CSS, JavaScript y Python.</li>
-                <li>Estructuras responsivas y temáticas visuales personalizadas (Neón / Dark Bronze).</li>
-                <li>Integración de modelos locales con Ollama y GUI en PyQt6 (Proyecto Jarvis).</li>
-            </ul>
-            <div class="card-action">
-                
+            <div>
+              <label>Color Pie de Página</label>
+              <input type="color" id="style-footer-bg" value="#0a0b0e">
             </div>
-        </section>
-
-        <!-- SECCIÓN 4: Sistemas de Gestión & Soluciones Digitales -->
-        <section class="info-card pulse-neon">
-            <div class="card-badge">Comercial & Gestión</div>
-            <h2 class="card-title">4. Gestión de Stock & E-Commerce</h2>
-            <p class="card-description">
-                Implementación de sistemas de control de inventarios y catálogos comerciales digitales optimizados.
-            </p>
-            <ul class="card-list">
-                <li>Sistemas de gestión de stock y punto de venta.</li>
-                <li>Desarrollo de tiendas online y catálogos con ruteo de pedidos a WhatsApp.</li>
-                <li>Diseño de branding, tarjetas con QR dinámicos y activos digitales.</li>
-            </ul>
-            <div class="card-action">
-                <!-- Puedes usar URL interna o externa según prefieras -->
-                <a href="https://trabajoweba.netlify.app" class="link-btn">Consultar Servicios →</a>
+          </div>
+          <div class="form-group grid-2">
+            <div>
+              <label>Color de Letras (Principal)</label>
+              <input type="color" id="style-text-color" value="#e6e8ec">
             </div>
-        </section>
+            <div>
+              <label>Color Principal/Dorado (Acentos)</label>
+              <input type="color" id="style-gold-color" value="#d4af37">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Color de Botones Palpitantes</label>
+            <input type="color" id="style-btn-color" value="#d4af37">
+          </div>
 
-    </main>
+          <button type="submit" class="btn btn-gold mt-20">Aplicar Estilo</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <!-- Pie de Página -->
-    <footer class="main-footer">
-        <p class="footer-copy">&copy; 2026 Jose Gabriel Cruz. Todos los derechos reservados.</p>
-        <p class="footer-subtext">Diseñado & Desarrollado | Alderetes, Tucumán</p>
-    </footer>
-
-    <script src="inicio.js"></script>
+  <script type="module" src="portafolio.js"></script>
 </body>
 </html>
